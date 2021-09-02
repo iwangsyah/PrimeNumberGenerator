@@ -1,7 +1,15 @@
 import React, {useState} from 'react';
-import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 const App = () => {
+  const scrollRef = React.useRef();
   const [primeList, setPrimeList] = useState([]);
 
   const isPrime = num => {
@@ -41,13 +49,20 @@ const App = () => {
       <View style={styles.content}>
         <View style={styles.container}>
           <Text style={styles.prime}>Prime Number</Text>
-          <View style={styles.valueContainer}>
-            {primeList.map((item, index) => (
-              <Text key={index} style={styles.value}>{`${item}${
-                index === primeList.length - 1 ? '' : ', '
-              }`}</Text>
-            ))}
-          </View>
+          <ScrollView
+            ref={scrollRef}
+            onContentSizeChange={() =>
+              scrollRef.current.scrollToEnd({animated: true})
+            }
+            style={styles.container}>
+            <View style={styles.valueContainer}>
+              {primeList.map((item, index) => (
+                <Text key={index} style={styles.value}>{`${item}${
+                  index === primeList.length - 1 ? '' : ', '
+                }`}</Text>
+              ))}
+            </View>
+          </ScrollView>
         </View>
         <TouchableOpacity style={styles.button} onPress={onGenerate}>
           <Text style={styles.txtButton}>Generate Prime Number</Text>
@@ -77,18 +92,21 @@ const styles = StyleSheet.create({
   },
   name: {fontSize: 18, color: '#FFFFFF'},
   content: {flex: 1, padding: 45},
-  prime: {fontSize: 18, fontWeight: 'bold'},
+  prime: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
   valueContainer: {
-    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 16,
   },
   value: {fontSize: 18},
   button: {
     backgroundColor: '#6877F2',
     alignItems: 'center',
     paddingVertical: 16,
+    marginTop: 20,
     borderRadius: 8,
   },
   txtButton: {
