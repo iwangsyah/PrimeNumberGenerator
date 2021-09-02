@@ -35,7 +35,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>IWANG Test</Text>
+        <Text style={styles.title}>Moutar Test</Text>
         <Text style={styles.name}>Wahyu Irwansyah</Text>
       </View>
       <View style={styles.content}>
@@ -52,7 +52,7 @@ const App = () => {
         <TouchableOpacity style={styles.button} onPress={onGenerate}>
           <Text style={styles.txtButton}>Generate Prime Number</Text>
         </TouchableOpacity>
-        <Text style={styles.footer}>IWANG Technologies</Text>
+        <Text style={styles.footer}>Moutar Technologies</Text>
       </View>
     </View>
   );
